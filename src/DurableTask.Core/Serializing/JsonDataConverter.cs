@@ -39,11 +39,7 @@ namespace DurableTask.Core.Serializing
             {
                 TypeNameHandling = TypeNameHandling.Objects,
                 DateParseHandling = DateParseHandling.None,
-#if NETSTANDARD2_0
                 SerializationBinder = new PackageUpgradeSerializationBinder()
-#else
-                Binder = new PackageUpgradeSerializationBinder()
-#endif
             })
         { }
 
@@ -86,7 +82,7 @@ namespace DurableTask.Core.Serializing
             {
                 writer.Formatting = (formatted ? Formatting.Indented : Formatting.None);
                 this.serializer.Serialize(writer, value);
-            
+
                 return textWriter.ToString();
             }
         }

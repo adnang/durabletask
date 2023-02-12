@@ -54,12 +54,7 @@ namespace DurableTask.Core.Common
         private static readonly JsonSerializerSettings ObjectJsonSettings = new JsonSerializerSettings
         {
             TypeNameHandling = TypeNameHandling.All,
-
-#if NETSTANDARD2_0
             SerializationBinder = new PackageUpgradeSerializationBinder()
-#else
-            Binder = new PackageUpgradeSerializationBinder()
-#endif
         };
         private static readonly JsonSerializer DefaultObjectJsonSerializer = JsonSerializer.Create(ObjectJsonSettings);
 
@@ -152,7 +147,7 @@ namespace DurableTask.Core.Common
         /// The default value comes from the WEBSITE_SITE_NAME environment variable, which is defined
         /// in Azure App Service. Other environments can use DTFX_APP_NAME to set this value.
         /// </remarks>
-        public static string AppName { get; set; } = 
+        public static string AppName { get; set; } =
             Environment.GetEnvironmentVariable("WEBSITE_SITE_NAME") ??
             Environment.GetEnvironmentVariable("DTFX_APP_NAME") ??
             string.Empty;
